@@ -6,6 +6,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background: rgba(50, 47, 151, 0.631);
 }
 
 * {
@@ -16,6 +18,11 @@ ul,
 ol {
   list-style: none;
   padding: 0;
+}
+
+button {
+  cursor: pointer;
+  color: inherit;
 }
 
 body {

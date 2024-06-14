@@ -1,0 +1,9 @@
+@import "../Contact/Contact.module.css";
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+  max-width: 900px;
+}
