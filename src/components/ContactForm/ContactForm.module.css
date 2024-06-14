@@ -1,8 +1,10 @@
-.searchBox {
+.addContact {
   display: flex;
   flex-direction: column;
   gap: 5px;
   padding: 20px 0px;
-  margin: auto;
-  width: fit-content;
+}
+
+.addContact button {
+  margin-top: 5px;
 }

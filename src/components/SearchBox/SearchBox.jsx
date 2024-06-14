@@ -1,8 +1,13 @@
+import { useId } from "react";
+import css from "./SearchBox.module.css";
+
 const SearchBox = () => {
+  const searchFieldId = useId();
+
   return (
-    <div>
-      <p>Find Contacts by Name</p>
-      <input type="text" name="searchbox" />
+    <div className={css.searchBox}>
+      <label htmlFor={searchFieldId}>Filter Contacts by Name</label>
+      <input type="text" name="searchbox" id={searchFieldId} />
     </div>
   );
 };

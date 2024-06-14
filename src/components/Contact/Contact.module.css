@@ -32,7 +32,7 @@
 }
 
 .contactInfo > p:first-child {
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .contact:hover p:first-child::before {
