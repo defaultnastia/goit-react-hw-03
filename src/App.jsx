@@ -6,6 +6,7 @@ import contacts from "./data/contacts.json";
 
 const App = () => (
   <>
+    <h1>Phone Book</h1>
     <ContactForm />
     <SearchBox />
     <ContactList contacts={contacts} />
