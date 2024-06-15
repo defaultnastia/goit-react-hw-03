@@ -18,6 +18,7 @@ const MaskedInput = (props) => (
 
 const contactValidationSchema = Yup.object().shape({
   name: Yup.string()
+    .trim()
     .min(3, "Name should contain at least 3 letters")
     .max(50, "Name should contain maximum 50 letters")
     .required("Please enter contact's name"),
@@ -29,6 +30,7 @@ const contactValidationSchema = Yup.object().shape({
 const ContactForm = ({ handleAddContact }) => {
   const handleSubmit = (values, actions) => {
     values.id = nanoid(10);
+    values.name = values.name.trim();
     values.avatar = faker.image.urlPicsumPhotos({ height: 80, width: 80 });
     handleAddContact(values);
     actions.resetForm();
