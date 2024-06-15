@@ -35,9 +35,9 @@
   font-weight: 800;
 }
 
-.contact:hover p:first-child::before {
+/* .contact:hover p:first-child::before {
   content: "Add ";
-}
+} */
 
 .contactInfo {
   display: flex;
@@ -45,11 +45,13 @@
   gap: 5px;
 }
 
-.contactInfo button {
+.delete {
   margin-top: 10px;
   width: 100%;
   border: 1px solid antiquewhite;
   border-radius: 5px;
+  text-align: center;
+  padding: 0;
 }
 
 .contactBox img {

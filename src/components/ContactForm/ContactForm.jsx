@@ -1,41 +1,60 @@
-import { Field, Form, Formik } from "formik";
+import { nanoid } from "nanoid";
 import { useId } from "react";
-import Input from "react-input-auto-format";
+import { faker } from "@faker-js/faker";
+import { Field, Form, Formik, ErrorMessage } from "formik";
+import { InputMask } from "@react-input/mask";
+import * as Yup from "yup";
+
 import css from "./ContactForm.module.css";
 
 const initialValues = {
   name: "",
-  phone: "",
+  number: "",
 };
 
-const FormattedInput = (props) => (
-  <Input
-    className="my-custom-input"
-    type="text"
-    {...props}
-    format="### - ## - ##"
-  />
+const MaskedInput = (props) => (
+  <InputMask mask="___-__-__" replacement={{ _: /\d/ }} {...props} />
 );
 
-const handleSubmit = (values, actions) => {
-  console.log(values);
+const contactValidationSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(3, "Name should contain at least 3 letters")
+    .max(50, "Name should contain maximum 50 letters")
+    .required("Please enter contact's name"),
+  number: Yup.string()
+    .min(9, "Please enter valid phone, example: 111 11 11")
+    .required("Please enter contact's phone"),
+});
 
-  actions.resetForm();
-};
+const ContactForm = ({ handleAddContact }) => {
+  const handleSubmit = (values, actions) => {
+    values.id = nanoid(10);
+    values.avatar = faker.image.urlPicsumPhotos({ height: 80, width: 80 });
+    handleAddContact(values);
+    actions.resetForm();
+  };
 
-const ContactForm = () => {
   const nameFieldId = useId();
   const phoneFieldId = useId();
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-      <Form className={css.addContact}>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      validationSchema={contactValidationSchema}
+    >
+      <Form className={css.addContact} autoComplete="off">
         <label htmlFor={nameFieldId}>Name</label>
-        <Field name="name" id={nameFieldId} />
-
+        <Field name="name" id={nameFieldId} placeholder="Name Surname" />
+        <ErrorMessage className={css.error} name="name" component="span" />
         <label htmlFor={phoneFieldId}>Phone</label>
-        <Field name="phone" as={FormattedInput} id={phoneFieldId} />
-
+        <Field
+          name="number"
+          id={phoneFieldId}
+          as={MaskedInput}
+          placeholder="000-00-00"
+        />
+        <ErrorMessage className={css.error} name="number" component="span" />
         <button type="submit">Add Contact</button>
       </Form>
     </Formik>
